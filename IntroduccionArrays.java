@@ -41,7 +41,12 @@ public class IntroduccionArrays {
      *                     correspondientes a los días de la semana, en orden.
      *                     Debe tener exactamente 7 elementos.
      */
-    public void mostrarTemperaturas(int[] temperaturas) {
+    public void mostrarTemperaturas(int[] temperaturas) { //declaro la variable int[] temperaturas
+        temperaturas = new int[7]; //asigno que espero 7 valores de temperaturas
+        temperaturas[0] = 30;
+        temperaturas[1]
+
+
 
     }
 
