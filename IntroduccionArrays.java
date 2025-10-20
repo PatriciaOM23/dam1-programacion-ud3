@@ -20,11 +20,30 @@
  */
 public class IntroduccionArrays {
 
+    /**
+     * Muestra por consola la temperatura máxima correspondiente a cada día de la
+     * semana.
+     * <p>
+     * Ejemplo de salida esperada:
+     * </p>
+     * 
+     * <pre>
+     * Lunes: 22º
+     * Martes: 25º
+     * Miércoles: 24º
+     * ...
+     * Domingo: 18º
+     * </pre>
+     *
+     * @param temperaturas array de enteros que contiene las temperaturas máximas
+     *                     correspondientes a los días de la semana, en orden.
+     *                     Debe tener exactamente 7 elementos.
+     */
 
-    public void mostrarTemperaturas(int[] temperaturas) { //declaro la variable int[] temperaturas
+    public static void mostrarTemperaturas(int[] temperaturas) { //declaro la variable int[] temperaturas
       String[] dias = {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"}; //INDICO LOS DIAS DE LA SEMANA QUE HAY
     for (int i = 0;i < temperaturas.length;i++){ //
-        System.out.println(dias[i] + "i" + temperaturasMax[i] + "º");
+        System.out.println(dias[i] + ": " + temperaturas[i] + "º");
     
     }
 
@@ -44,7 +63,7 @@ public class IntroduccionArrays {
         // 1. Declara un array de tipo int llamado maxTemperaturas que tiene 7 elementos
         // Cada elemento se corresponde con un día de la semana: Lunes, ... Domingo
         int[] temperaturasMax = {22,23,24,24,23,21,20};
-        mostrarTemperaturas();
+        mostrarTemperaturas(temperaturasMax);
 
         // 2. Los valores son: 22, 23, 24, 24 , 23, 21, 20
 
