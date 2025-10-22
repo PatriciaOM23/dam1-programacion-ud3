@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class ResultadosAtleti {
@@ -49,6 +51,12 @@ public class ResultadosAtleti {
      * @return media de goles marcados
      */
     public static double mediaGolesMarcados(Partido[] temporada) {
+
+    
+        
+
+    //return Arrays.stream(temporada).mapToDouble(Partido::getGolesMarcados).average().getAsDouble();
+
         // TODO:
         double suma = 0;
  //Me invento la variable Partido p 
