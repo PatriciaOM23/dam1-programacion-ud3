@@ -4,7 +4,7 @@ public class Cuenta {
 
     public static void Devolver(int cantidad) {
 
-        if (cantidad > 0) {
+        if (cantidad >= 0) {
             System.out.println(cantidad);
             cantidad--;
             Devolver(cantidad);
