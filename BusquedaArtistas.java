@@ -110,10 +110,8 @@ public class BusquedaArtistas {
      * @return array con índices de artistas que empiezan por esa letra
      */
     public static int[] indicesPorInicial(Artista[] cartel, char inicial) {
-    return new int[1];
     
-    }
-
+        
     /**
      * Devuelve los índices de artistas cuyo nombre empieza por 'inicial' (ignora
      * mayúsculas)
@@ -122,9 +120,35 @@ public class BusquedaArtistas {
      */
     public static int[] indicesPorInicialYSeguidores(Artista[] cartel, char inicial,
             int minSeguidoresMiles, int maxSeguidoresMiles) {
-
-        return new int[0];
+               if(inicial == '\u0000'){
+            inicial = 'A';
+        }
+        // if(minSeguidoresMiles == 0){
+        //     minSeguidoresMiles =0;
+        // }
+        if(maxSeguidoresMiles == 0){
+            maxSeguidoresMiles = 1000000;
+        }
+        int t = 0;
+        inicial = Character.toLowerCase(inicial);
+        for(int i = 0; i < cartel.length; i++){
+            if(cartel[i].getNombre().toLowerCase().charAt(0) == inicial && cartel[i].getSeguidoresMiles() > minSeguidoresMiles && cartel[i].getSeguidoresMiles() < maxSeguidoresMiles){
+                t++;
+            }
+        }
+        int [] indice = new int[t];
+        t = 0;
+        for(int i = 0; i < cartel.length; i++){
+            if(cartel[i].getNombre().toLowerCase().charAt(0) == inicial && cartel[i].getSeguidoresMiles() > minSeguidoresMiles && cartel[i].getSeguidoresMiles() < maxSeguidoresMiles){
+                indice[t++] = i;
+            }
+        }
+        return indice;
     }
+
+
+
+    
 
     /**
      * Imprime por pantalla los artistas indicados por sus índices.
