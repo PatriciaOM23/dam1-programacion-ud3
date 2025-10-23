@@ -41,7 +41,7 @@ public class BusquedaArtistas {
      */
     public static int indiceDe(Artista[] cartel, String nombreBuscado) {
         for (int i = 0; i < cartel.length; i++) {
-            if (cartel[i].getNombre().equals(nombreBuscado)) { // USAMOS EQUALS PORQUE ES UN STRING
+            if (cartel[i].getNombre().equalsIgnoreCase(nombreBuscado)) { // USAMOS EQUALS PORQUE ES UN STRING
                 return i;
             }
         }
@@ -56,17 +56,13 @@ public class BusquedaArtistas {
      * @return true si existe, false en caso contrario
      */
     public static boolean existe(Artista[] cartel, String nombreBuscado) {
-        return indiceDe(cartel, nombreBuscado) != -1;
-        
-      /*   for (int i = 0; i < cartel.length; i++) {
-               if (cartel[i].getNombre().equals(nombreBuscado)) {
+        for (int i = 0; i < cartel.length; i++) {
+            if (cartel[i].getNombre().equalsIgnoreCase(nombreBuscado)) {
                 return true;
-                
             }
         }
-        return false;*/
+        return false;
     }
-
 
     /**
      * Devuelve un array con todos los índices donde el nombre coincide (ignora
@@ -77,28 +73,19 @@ public class BusquedaArtistas {
      * @param nombreBuscado nombre a buscar
      * @return array con índices de coincidencias
      */
-
     public static int[] indicesDeTodos(Artista[] cartel, String nombreBuscado) {
-     int t = 0;
+        int t = 0;
         for(int i = 0; i < cartel.length; i++){
-            if(cartel[i].getNombre().equalsIgnoreCase(nombreBuscado)){
-                t++;
-            }
-        }
-        int [] indice = new int[t];
-        t = 0;
-        for(int i = 0; i < cartel.length; i++){
-            if(cartel[i].getNombre().equalsIgnoreCase(nombreBuscado)){
-                
-                indice[t++] = i;
-              
-            }
-        }
-        return indice; 
+          if (cartel[i].getNombre().equalsIgnoreCase(nombreBuscado)){
+            t++;
+          }
         
-        
-           
+
+        }
+        return new int[0];
+
     }
+    
 
     /**
      * Devuelve un array con los índices de artistas cuyo nombre empieza por la
@@ -110,8 +97,35 @@ public class BusquedaArtistas {
      * @return array con índices de artistas que empiezan por esa letra
      */
     public static int[] indicesPorInicial(Artista[] cartel, char inicial) {
-    
         
+        int c = 0;
+        char inicialMin = Character.toLowerCase(inicial);
+        
+        for(int i = 0; i < cartel.length; i++){
+            
+            String nombreArtista = cartel[i].getNombre(); 
+            char inic = nombreArtista.charAt(0);
+
+            if(Character.toLowerCase(inic) == inicialMin) {
+                c++; 
+            }
+        }
+        int[] total  = new int[c]; 
+        int indiceTotal = 0;
+        for(int i = 0; i < cartel.length; i++){
+            
+            String nombreArtista = cartel[i].getNombre(); 
+            char inic = nombreArtista.charAt(0);
+
+            if(Character.toLowerCase(inic) == inicialMin) {
+                total[indiceTotal] = i;
+                indiceTotal++;
+            }
+        }
+        
+
+    return total;
+    }
     /**
      * Devuelve los índices de artistas cuyo nombre empieza por 'inicial' (ignora
      * mayúsculas)
@@ -120,35 +134,10 @@ public class BusquedaArtistas {
      */
     public static int[] indicesPorInicialYSeguidores(Artista[] cartel, char inicial,
             int minSeguidoresMiles, int maxSeguidoresMiles) {
-               if(inicial == '\u0000'){
-            inicial = 'A';
-        }
-        // if(minSeguidoresMiles == 0){
-        //     minSeguidoresMiles =0;
-        // }
-        if(maxSeguidoresMiles == 0){
-            maxSeguidoresMiles = 1000000;
-        }
-        int t = 0;
-        inicial = Character.toLowerCase(inicial);
-        for(int i = 0; i < cartel.length; i++){
-            if(cartel[i].getNombre().toLowerCase().charAt(0) == inicial && cartel[i].getSeguidoresMiles() > minSeguidoresMiles && cartel[i].getSeguidoresMiles() < maxSeguidoresMiles){
-                t++;
-            }
-        }
-        int [] indice = new int[t];
-        t = 0;
-        for(int i = 0; i < cartel.length; i++){
-            if(cartel[i].getNombre().toLowerCase().charAt(0) == inicial && cartel[i].getSeguidoresMiles() > minSeguidoresMiles && cartel[i].getSeguidoresMiles() < maxSeguidoresMiles){
-                indice[t++] = i;
-            }
-        }
-        return indice;
+
+
+        return new int[0];
     }
-
-
-
-    
 
     /**
      * Imprime por pantalla los artistas indicados por sus índices.
@@ -156,71 +145,106 @@ public class BusquedaArtistas {
      * Si el array de índices está vacío, no imprime nada.
      */
     public static void mostrarArtistas(Artista[] cartel, int[] indices) {
-      for(int i = 0; i < indices.length ; i++){
-       System.out.println(cartel[indices[i]]);
-
-      }
-    
+        
       
     }
 
- // ------------------------------------------------------------
-// MAIN de pruebas (usará los métodos obligatorios)
-// ------------------------------------------------------------
+    // ------------------------------------------------------------
+    // MAIN de pruebas (usará los métodos obligatorios)
+    // ------------------------------------------------------------
 
-public static void main(String[] args) {
-    // Cartel inicial (12 artistas)
-    Artista[] cartel = {
-            new Artista("Aitana", 1200),
-            new Artista("Quevedo", 2500),
-            new Artista("Rosalía", 900),
-            new Artista("Rosalía", 3100),
-            new Artista("Rels B", 5400),
-            new Artista("Lola Índigo", 850),
-            new Artista("Rels B", 2000),
-            new Artista("Saiko", 1500),
-            new Artista("Feid", 4200),
-            new Artista("Karol G", 6800),
-            new Artista("Rauw Alejandro", 3600),
-            new Artista("Morad", 2700)
-    };
+    public static void main(String[] args) {
+        Locale.setDefault(Locale.ROOT);
+        Scanner sc = new Scanner(System.in);
 
-    // Parámetros por defecto para la demo
-    final String BUSCAR_UNO   = "Rosalía";
-    final String BUSCAR_TODOS = "Rels B";
-    final char   INICIAL      = 'R';
-    final char   INICIAL2     = 'R';
-    final int    MIN          = 2000;
-    final int    MAX          = 4000;
+        // Cartel inicial (12 artistas)
+        Artista[] cartel = {
+                new Artista("Aitana", 1200),
+                new Artista("Quevedo", 2500),
+                new Artista("Bad Gyal", 900),
+                new Artista("Rosalía", 3100),
+                new Artista("Bizarrap", 5400),
+                new Artista("Lola Índigo", 850),
+                new Artista("Rels B", 2000),
+                new Artista("Saiko", 1500),
+                new Artista("Feid", 4200),
+                new Artista("Karol G", 6800),
+                new Artista("Rauw Alejandro", 3600),
+                new Artista("Morad", 2700)
+        };
 
-    System.out.println("=== Demo rápida (sin Scanner) ===");
+        // Búsqueda de primera coincidencia
+        System.out.print("Artista a buscar (primera coincidencia): ");
+        String nombre = sc.nextLine().trim();
+        int pos = indiceDe(cartel, nombre);
+        if (pos >= 0) {
+            System.out.println("✔ " + nombre + " actúa. Índice: " + pos);
+            System.out.println("  Detalles: " + cartel[pos]);
+        } else {
+            System.out.println("✘ " + nombre + " no actúa en el festival.");
+        }
 
-    // 1) Primera coincidencia
-    int pos = indiceDe(cartel, BUSCAR_UNO);
-    if (pos >= 0) {
-        System.out.println("✔ " + BUSCAR_UNO + " actúa. Índice: " + pos);
-        System.out.println("  Detalles: " + cartel[pos]);
-    } else {
-        System.out.println("✘ " + BUSCAR_UNO + " no actúa en el festival.");
-    }
+        // Búsqueda todas las coincidencias por nombre
+        System.out.print("\nArtista para listar TODAS las coincidencias: ");
+        String nombreTodas = sc.nextLine().trim();
+        int[] todos = indicesDeTodos(cartel, nombreTodas);
+        if (todos.length > 0) {
+            System.out.println("Coincidencias: " + todos.length);
+            mostrarArtistas(cartel, todos); // <-- sin for en main
+        } else {
+            System.out.println("No hay coincidencias para \"" + nombreTodas + "\".");
+        }
 
-    // 2) Todas las coincidencias
-    int[] todos = indicesDeTodos(cartel, BUSCAR_TODOS);
-    
-    System.out.println("\nCoincidencias de \"" + BUSCAR_TODOS + "\": " + todos.length);
-    if (todos.length > 0) mostrarArtistas(cartel, todos);
+        // Búsqueda de artistas por inicial
+        System.out.print("\nLetra inicial (si dejas vacío usaré 'A'): ");
+        String entrada = sc.nextLine().trim();
 
-    // 3) Por inicial
-    int[] porInicial = indicesPorInicial(cartel, INICIAL);
-    System.out.println("\nArtistas que empiezan por '" + Character.toUpperCase(INICIAL) + "': " + porInicial.length);
-    if (porInicial.length > 0) mostrarArtistas(cartel, porInicial);
+        char inicial = 'A';
+        if (entrada.length() > 0) {
+            inicial = entrada.charAt(0);
+        }
+        System.out.println("Usando la inicial: " + Character.toUpperCase(inicial));
+        int[] porInicial = indicesPorInicial(cartel, inicial);
+        if (porInicial.length > 0) {
+            System.out.println("Artistas que empiezan por '" + Character.toUpperCase(inicial) + "':");
+            mostrarArtistas(cartel, porInicial); // <-- sin for en main
+        } else {
+            System.out.println("No hay artistas que empiecen por '" + Character.toUpperCase(inicial) + "'.");
+        }
 
-    // 4) Inicial + rango (INCLUSIVO)
-    int[] filtrados = indicesPorInicialYSeguidores(cartel, INICIAL2, MIN, MAX);
-    System.out.println("\nArtistas que empiezan por '" + Character.toUpperCase(INICIAL2)
-            + "' y tienen entre " + MIN + "K y " + MAX + "K seguidores:");
-    if (filtrados.length > 0) mostrarArtistas(cartel, filtrados);
-    else System.out.println("  (ninguno)");
+
+        // Búsqueda por inicial + rango de seguidores (en miles)
+        System.out.print("\nInicial para filtrar (vacío='A'): ");
+        String entradaIni = sc.nextLine().trim();
+        char inicial2 = 'A';
+        if (entradaIni.length() > 0) {
+            inicial2 = entradaIni.charAt(0);
+        }
+
+        System.out.print("Mínimo de seguidores en miles (vacío=0): ");
+        String sMin = sc.nextLine().trim();
+        int min = 0;
+        if (sMin.length() > 0) {
+            min = Integer.parseInt(sMin);
+        }
+
+        System.out.print("Máximo de seguidores en miles (vacío=1000000): ");
+        String sMax = sc.nextLine().trim();
+        int max = 1000000;
+        if (sMax.length() > 0) {
+            max = Integer.parseInt(sMax);
+        }
+
+        int[] filtrados = indicesPorInicialYSeguidores(cartel, inicial2, min, max);
+        if (filtrados.length > 0) {
+            System.out.println("\nArtistas que empiezan por '" + Character.toUpperCase(inicial2)
+                    + "' y tienen entre " + min + "K y " + max + "K seguidores:");
+            mostrarArtistas(cartel, filtrados);
+        } else {
+            System.out.println("\nNo hay artistas que cumplan ambos filtros.");
+        }
+
+        sc.close();
+   }
 }
-
-}
+ 
