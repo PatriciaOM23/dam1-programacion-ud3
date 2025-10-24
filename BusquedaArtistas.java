@@ -112,6 +112,25 @@ public class BusquedaArtistas {
     public static int[] indicesPorInicial(Artista[] cartel, char inicial) {
     
         
+        if(inicial == '\u0000'){
+            inicial = 'A';
+        }
+        int t = 0;
+        inicial = Character.toLowerCase(inicial);
+        for(int i = 0; i < cartel.length; i++){
+            if(cartel[i].getNombre().toLowerCase().charAt(0) == inicial){
+                t++;
+            }
+        }
+        int [] indice = new int[t];
+        t = 0;
+        for(int i = 0; i < cartel.length; i++){
+            if(cartel[i].getNombre().toLowerCase().charAt(0) == inicial){
+                indice[t++] = i;
+            }
+        }
+        return indice;
+    }
     /**
      * Devuelve los índices de artistas cuyo nombre empieza por 'inicial' (ignora
      * mayúsculas)
@@ -158,11 +177,13 @@ public class BusquedaArtistas {
     public static void mostrarArtistas(Artista[] cartel, int[] indices) {
       for(int i = 0; i < indices.length ; i++){
        System.out.println(cartel[indices[i]]);
-
+        
       }
-    
+      
+      System.out.println("");
       
     }
+    
 
  // ------------------------------------------------------------
 // MAIN de pruebas (usará los métodos obligatorios)
