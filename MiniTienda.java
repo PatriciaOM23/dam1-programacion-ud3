@@ -180,6 +180,11 @@ public class MiniTienda {
     // "Zapatillas" (59.00) → índice 4.
     public static int indiceMasCaro(Producto[] cat) {
         // TODO
+
+        for (int i = 0; i < cat.length; i++) {
+
+        }
+
         return -1;
     }
 
