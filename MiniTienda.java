@@ -180,12 +180,22 @@ public class MiniTienda {
     // "Zapatillas" (59.00) → índice 4.
     public static int indiceMasCaro(Producto[] cat) {
         // TODO
-
-        for (int i = 0; i < cat.length; i++) {
-
+        
+        
+        double maxPrecio = cat[0].getPrecio();
+        int indiceMaxPrecio = 0;
+        for(int i = 1; i < cat.length; i++){
+           if(cat[i].getPrecio() > maxPrecio){
+            maxPrecio =  cat[i].getPrecio(); //Se va actualizando maxPrecio y revisa cada vez si el mismo es mayor a el indice (precio) por el que va el bucle
+            indiceMaxPrecio = i;
+            }
         }
+         return indiceMaxPrecio;
+       
 
-        return -1;
+                
+
+        
     }
 
     // ----------------------------------------------------------------------
@@ -197,9 +207,21 @@ public class MiniTienda {
     // "Calcetines" (3.50) → índice 5.
     public static int indiceMasBarato(Producto[] cat) {
         // TODO
-        return -1;
-    }
+            double minPrecio = cat[0].getPrecio();
+        int indiceMinPrecio = 0;
+        for(int i = 1; i < cat.length; i++){
+           if(cat[i].getPrecio() < minPrecio){
+            minPrecio =  cat[i].getPrecio(); //Se va actualizando maxPrecio y revisa cada vez si el mismo es mayor a el indice (precio) por el que va el bucle
+            indiceMinPrecio = i;
+            }
+        }
+         return indiceMinPrecio;
+       
 
+                
+
+        
+    }
     // ----------------------------------------------------------------------
     // 7) Aplicar descuento (%) devolviendo un NUEVO array
     // Qué debe hacer:
