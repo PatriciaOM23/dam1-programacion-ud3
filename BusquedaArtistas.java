@@ -118,7 +118,8 @@ public class BusquedaArtistas {
             char inic = nombreArtista.charAt(0);
 
             if(Character.toLowerCase(inic) == inicialMin) {
-                total[indiceTotal] = i;
+                total[indiceTotal] = i; //total es lo que rellenamos con los indices de i (cartel length) y
+                // indiceTotal lo incrementamos cada vez que se cumple la condicion porque solo tenemos 2 valores de c (lo de total)
                 indiceTotal++;
             }
         }
