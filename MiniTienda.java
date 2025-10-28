@@ -233,13 +233,36 @@ public class MiniTienda {
     // 10% de descuento → precio * 0.9
     public static Producto[] aplicarDescuento(Producto[] cat, double porcentaje) {
        Producto[] rebajas = Arrays.copyOf(cat, cat.length);
-
+        // Arrays.copyOf hace una shallow copy (Superficial), los cambios que haga se refieren al original asi
+    
+        /* 
+         Hago una deep copy (Profunda) dentro del bucle, así no modifico lo original
         for (int i = 0; i < rebajas.length; i++) {
+            String nombre = cat[i].getNombre();
+            double precio =  cat[i].getPrecio();
+            int stock = cat[i].getStock();
+
+         */
+        for (int i = 0; i < rebajas.length; i++) {
+
+
+            String nombre = cat[i].getNombre();
+            double precio =  cat[i].getPrecio();
+            int stock = cat[i].getStock();
+
             
+            double precioRebajado = precio * (1 - porcentaje/100);
+        
+            precioRebajado = Math.max(precioRebajado, 0); //precioRebajado tiene que ser mayor a 0, si no lo vuelve 0 
+            rebajas[i] = new Producto(nombre, precioRebajado, stock);
+
+           
             
         }
         // TODO
+        return rebajas;
     }
+
 
     // ----------------------------------------------------------------------
     // 8) Sublista / página [from, to)
@@ -254,7 +277,17 @@ public class MiniTienda {
     // [0,3) → {Camiseta, Jeans, Sudadera}
     public static Producto[] pagina(Producto[] cat, int from, int to) {
         // TODO
-        return new Producto[0];
+        
+       
+        from = Math.max(0,from);
+        to = Math.min(cat.length, to);
+        if( from > to){
+            from = to;
+        }
+
+        return Arrays.copyOfRange(cat, from, to);
+
+        
     }
 
     // ----------------------------------------------------------------------
