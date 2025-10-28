@@ -66,7 +66,7 @@ public class Agenda {
             
         }
         return favs;
-        // TODO
+        
     }
 
     /**
