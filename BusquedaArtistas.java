@@ -134,11 +134,38 @@ public class BusquedaArtistas {
      * Si no hay, devuelve array de longitud 0.
      */
     public static int[] indicesPorInicialYSeguidores(Artista[] cartel, char inicial,
-            int minSeguidoresMiles, int maxSeguidoresMiles) {
+        int minSeguidoresMiles, int maxSeguidoresMiles) {
 
+    int contador = 0;
+    for (int i = 0; i < cartel.length; i++) {
+        char primeraLetra = Character.toLowerCase(cartel[i].getNombre().charAt(0));
+        int seguidores = cartel[i].getSeguidoresMiles();
 
-        return new int[0];
+        if (primeraLetra == Character.toLowerCase(inicial) &&
+            seguidores >= minSeguidoresMiles &&
+            seguidores <= maxSeguidoresMiles) {
+            contador++;
+        }
     }
+
+    int[] resultado = new int[contador];
+    int j = 0;
+
+    for (int i = 0; i < cartel.length; i++) {
+        char primeraLetra = Character.toLowerCase(cartel[i].getNombre().charAt(0));
+        int seguidores   = cartel[i].getSeguidoresMiles();
+
+        if (primeraLetra == Character.toLowerCase(inicial) &&
+            seguidores >= minSeguidoresMiles &&
+            seguidores <= maxSeguidoresMiles) {
+            resultado[j] = i;
+            j++;
+        }
+    }
+
+    return resultado;
+}
+
 
     /**
      * Imprime por pantalla los artistas indicados por sus índices.
