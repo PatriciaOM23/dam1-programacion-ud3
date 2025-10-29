@@ -107,7 +107,7 @@ public class AnalisisJuegos {
                 j++;
             }
         }
-        return indices;
+        return indices; // porque no me devuelve nada wtf
 
     }
 
@@ -117,8 +117,34 @@ public class AnalisisJuegos {
      */
     public static int[] indicesPorInicial(Juego[] biblioteca, char inicial) {
         // TODO:
+        
+        if (biblioteca.length == 0){
+            return new int[0];
+        }
+        
+        int c = 0;
+        for(int i = 0; i < biblioteca.length; i++){
+            char buscarInicial = biblioteca[i].getNombre().charAt(0);
+            buscarInicial = Character.toLowerCase(buscarInicial);
+            inicial = Character.toLowerCase(inicial);
+            if(inicial == buscarInicial){
+                c++;
+           
+            }
+        }
+        int[] buscarIndices = new int[c];
+        int j = 0;
+         for(int i = 0; i < biblioteca.length; i++){
+         char buscarInicial = biblioteca[i].getNombre().charAt(0);
+            buscarInicial = Character.toLowerCase(buscarInicial);
+            inicial = Character.toLowerCase(inicial);
+            if(inicial == buscarInicial){
+                buscarIndices[j] = buscarInicial;
+                j++;
+            }
+        }   
+        return buscarIndices;
 
-        return new int[0];
     }
 
     /**
