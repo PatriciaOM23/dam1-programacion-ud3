@@ -139,7 +139,7 @@ public class AnalisisJuegos {
             buscarInicial = Character.toLowerCase(buscarInicial);
             inicial = Character.toLowerCase(inicial);
             if(inicial == buscarInicial){
-                buscarIndices[j] = buscarInicial;
+                buscarIndices[j] = i;
                 j++;
             }
         }   
@@ -153,16 +153,43 @@ public class AnalisisJuegos {
      */
     public static int[] indicesPorInicialYJugadores(Juego[] biblioteca, char inicial,
             int minMiles, int maxMiles) {
-                
-
+            int c = 0;
+            inicial = Character.toLowerCase(inicial);
             
-        return new int[0];
+
+            for(int i = 0; i < biblioteca.length; i++){
+                int jugadores = biblioteca[i].getJugadoresMiles();
+                char primerCaracter = biblioteca[i].getNombre().toLowerCase().charAt(0);
+                if (primerCaracter == inicial && jugadores >= minMiles && jugadores <= maxMiles){
+                    c++;
+
+                }
+                
+            }
+            int[] indicesXInicial = new int[c];
+            int j = 0;
+            for(int i = 0; i < biblioteca.length; i++){
+                char primerCaracter = biblioteca[i].getNombre().toLowerCase().charAt(0);
+                int jugadores = biblioteca[i].getJugadoresMiles();
+                if (primerCaracter == inicial && jugadores >= minMiles && jugadores <= maxMiles){
+                    indicesXInicial[j] = i;
+                    j++;
+
+                }
+            }
+            return indicesXInicial;
+            
+            
     }
 
     /**
      * Imprime por pantalla los juegos indicados por sus índices.
      */
     public static void mostrarJuegos(Juego[] biblioteca, int[] indices) {
+
+        for (int i = 0; i < indices.length; i++){
+           System.out.println(biblioteca[indices[i]]);
+        }
 
     }
 
