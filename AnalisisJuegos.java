@@ -39,8 +39,8 @@ public class AnalisisJuegos {
      */
     public static int contarMasJugadores(Juego[] biblioteca, int umbralMiles) {
         int c = 0;
-        for (int i = 0; i < biblioteca.length; i++) {
-            if (biblioteca[i].getJugadoresMiles() > umbralMiles) {
+        for (Juego biblioteca1 : biblioteca) {
+            if (biblioteca1.getJugadoresMiles() > umbralMiles) {
                 c++;
             }
         }
