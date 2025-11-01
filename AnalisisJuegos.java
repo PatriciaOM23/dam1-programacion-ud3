@@ -153,7 +153,9 @@ public class AnalisisJuegos {
      */
     public static int[] indicesPorInicialYJugadores(Juego[] biblioteca, char inicial,
             int minMiles, int maxMiles) {
+                
 
+            
         return new int[0];
     }
 
