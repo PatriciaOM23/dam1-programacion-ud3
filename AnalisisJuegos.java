@@ -117,32 +117,32 @@ public class AnalisisJuegos {
      */
     public static int[] indicesPorInicial(Juego[] biblioteca, char inicial) {
         // TODO:
-        
-        if (biblioteca.length == 0){
+
+        if (biblioteca.length == 0) {
             return new int[0];
         }
-        
+
         int c = 0;
-        for(int i = 0; i < biblioteca.length; i++){
+        for (int i = 0; i < biblioteca.length; i++) {
             char buscarInicial = biblioteca[i].getNombre().charAt(0);
             buscarInicial = Character.toLowerCase(buscarInicial);
             inicial = Character.toLowerCase(inicial);
-            if(inicial == buscarInicial){
+            if (inicial == buscarInicial) {
                 c++;
-           
+
             }
         }
         int[] buscarIndices = new int[c];
         int j = 0;
-         for(int i = 0; i < biblioteca.length; i++){
-         char buscarInicial = biblioteca[i].getNombre().charAt(0);
+        for (int i = 0; i < biblioteca.length; i++) {
+            char buscarInicial = biblioteca[i].getNombre().charAt(0);
             buscarInicial = Character.toLowerCase(buscarInicial);
             inicial = Character.toLowerCase(inicial);
-            if(inicial == buscarInicial){
+            if (inicial == buscarInicial) {
                 buscarIndices[j] = i;
                 j++;
             }
-        }   
+        }
         return buscarIndices;
 
     }
@@ -153,33 +153,31 @@ public class AnalisisJuegos {
      */
     public static int[] indicesPorInicialYJugadores(Juego[] biblioteca, char inicial,
             int minMiles, int maxMiles) {
-            int c = 0;
-            inicial = Character.toLowerCase(inicial);
-            
+        int c = 0;
+        inicial = Character.toLowerCase(inicial);
 
-            for(int i = 0; i < biblioteca.length; i++){
-                int jugadores = biblioteca[i].getJugadoresMiles();
-                char primerCaracter = biblioteca[i].getNombre().toLowerCase().charAt(0);
-                if (primerCaracter == inicial && jugadores >= minMiles && jugadores <= maxMiles){
-                    c++;
+        for (int i = 0; i < biblioteca.length; i++) {
+            int jugadores = biblioteca[i].getJugadoresMiles();
+            char primerCaracter = biblioteca[i].getNombre().toLowerCase().charAt(0);
+            if (primerCaracter == inicial && jugadores >= minMiles && jugadores <= maxMiles) {
+                c++;
 
-                }
-                
             }
-            int[] indicesXInicial = new int[c];
-            int j = 0;
-            for(int i = 0; i < biblioteca.length; i++){
-                char primerCaracter = biblioteca[i].getNombre().toLowerCase().charAt(0);
-                int jugadores = biblioteca[i].getJugadoresMiles();
-                if (primerCaracter == inicial && jugadores >= minMiles && jugadores <= maxMiles){
-                    indicesXInicial[j] = i;
-                    j++;
 
-                }
+        }
+        int[] indicesXInicial = new int[c];
+        int j = 0;
+        for (int i = 0; i < biblioteca.length; i++) {
+            char primerCaracter = biblioteca[i].getNombre().toLowerCase().charAt(0);
+            int jugadores = biblioteca[i].getJugadoresMiles();
+            if (primerCaracter == inicial && jugadores >= minMiles && jugadores <= maxMiles) {
+                indicesXInicial[j] = i;
+                j++;
+
             }
-            return indicesXInicial;
-            
-            
+        }
+        return indicesXInicial;
+
     }
 
     /**
@@ -187,8 +185,8 @@ public class AnalisisJuegos {
      */
     public static void mostrarJuegos(Juego[] biblioteca, int[] indices) {
 
-        for (int i = 0; i < indices.length; i++){
-           System.out.println(biblioteca[indices[i]]);
+        for (int i = 0; i < indices.length; i++) {
+            System.out.println(biblioteca[indices[i]]);
         }
 
     }
@@ -237,7 +235,6 @@ public class AnalisisJuegos {
         System.out.println("Listado del rango:");
         mostrarJuegos(biblioteca, idxRango);
 
-        
         int[] idxCombo = indicesPorInicialYJugadores(biblioteca, INICIAL, MIN_COMBO, MAX_COMBO);
         System.out.println("\nJuegos que empiezan por '" + Character.toUpperCase(INICIAL)
                 + "' y tienen entre " + MIN_COMBO + "K y " + MAX_COMBO + "K jugadores:");
